@@ -1,25 +1,51 @@
-# Your code here
-
-
 
 def finder(files, queries):
-    """
-    YOUR CODE HERE
-    """
-    # Your code here
 
-    return result
+	file_dict = {}
+
+	result = []
+
+	length = len(files)
+
+	for i in range(length):
+
+		parsed_file_path = files[i].split('/')
+
+		file_name = parsed_file_path[len(parsed_file_path)-1]
+
+		if file_name in file_dict:
+
+			file_dict[file_name].add(i)
+
+		else:
+
+			file_dict[file_name] = set()
+			file_dict[file_name].add(i)
+
+	for query in queries:
+
+		if query in file_dict:
+
+			num_files = len(file_dict[query])
+
+			while num_files > 0:
+
+				result += [files[file_dict[query].pop()]]
+
+				num_files -= 1
+
+	return result
 
 
 if __name__ == "__main__":
-    files = [
-        '/bin/foo',
-        '/bin/bar',
-        '/usr/bin/baz'
-    ]
-    queries = [
-        "foo",
-        "qux",
-        "baz"
-    ]
-    print(finder(files, queries))
+	files = [
+		'/bin/foo',
+		'/bin/bar',
+		'/usr/bin/baz'
+	]
+	queries = [
+		"foo",
+		"qux",
+		"baz"
+	]
+	print(finder(files, queries))
