@@ -24,7 +24,8 @@ def finder(files, queries):
 
 	for query in queries:
 
-		try:
+		if query in file_dict:
+
 			num_files = len(file_dict[query])
 
 			while num_files > 0:
@@ -32,9 +33,6 @@ def finder(files, queries):
 				result += [files[file_dict[query].pop()]]
 
 				num_files -= 1
-
-		except:
-			pass
 
 	return result
 
